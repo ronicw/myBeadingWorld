@@ -35,7 +35,7 @@ Ideas to do -
     
     
 ```mermaid
-graph TD
+flowchart TD
     user(User)
     d(Database)
     b(Bead Service)
