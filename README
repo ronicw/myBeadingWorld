@@ -32,3 +32,15 @@ Ideas to do -
 - beads to be purchased
     * stores
     * cost per store and size
+    
+    
+```mermaid
+graph TD
+    user(User)
+    d(Database)
+    b(Bead Service)
+    f(Bead Frontend)
+    user---->f
+    b---->d
+    f---->b
+```
