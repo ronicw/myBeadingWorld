@@ -16,6 +16,7 @@ jobs:
       - name: Build Artifact
         run: |
           java -version
+          gradle -version
           echo 'Build Artifact...'
 
       - name: Run Code Quality Tools
