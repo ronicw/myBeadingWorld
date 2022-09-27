@@ -13,3 +13,23 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Build Artifact
+        run: echo 'Build Artifact...'
+
+      - name: Run Code Quality Tools
+        run: echo 'Run Code Quality Tools...'
+
+      - name: Run Tests
+        run: echo 'Run Tests...'
+
+      - name: Run Integration Tests
+        run: echo 'Run Integration Tests...'
+
+      - name: Verify Docker Build
+        run: echo 'Verifying Docker Build...'
+
+      - name: Publish my results
+        run: echo 'Publish my results.'
+
+
+
