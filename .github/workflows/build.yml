@@ -14,7 +14,9 @@ jobs:
           fetch-depth: 0
 
       - name: Build Artifact
-        run: echo 'Build Artifact...'
+        run: |
+          java -version
+          echo 'Build Artifact...'
 
       - name: Run Code Quality Tools
         run: echo 'Run Code Quality Tools...'
