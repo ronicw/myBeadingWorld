@@ -1,0 +1,112 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: Beadwork API
+  description: An API to assist beaders with storing and searching through various beading techniques, recipes, inventory and for keeping track of the cost of supplies, etc.
+paths:
+  /techniques:
+    get:
+      description: Returns a list of the stored beading techniques
+      parameters:
+        - $ref: '#/components/parameters/PageLimit'
+        - $ref: '#/components/parameters/PageOffset'
+      responses:
+        '200':
+          description: A JSON array of beading techniques
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Technique'
+        '400':
+          $ref: '#/components/responses/400Error'
+    post:
+      description: Lets a user post a new technique
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Technique'
+      responses:
+        '200':
+          description: Successfully created a new technique
+
+        '400':
+          $ref: '#/components/responses/400Error'
+
+  /techniques/{techniqueName}:
+    get:
+      description: Returns a technique using its unique name
+      parameters:
+        - name: techniqueName
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully returned a beading techinique
+          content:
+            application/json:
+              schema:
+                  type: object
+                  properties:
+                    techniqueName:
+                      type: string
+                    techniqueDescription:
+                      type: string
+                    techniqueUrl:
+                      type: string
+                    techniquePictures:
+                      type: string
+        '400':
+          $ref: '#/components/responses/400Error'
+components:
+  schemas:
+    Technique:
+      type: object
+      required:
+        - techniqueName
+      properties:
+        techniqueName:
+          type: string
+        techniqueDescription:
+          type: string
+        techniqueUrl:
+          type: string
+        techniquePictures:
+          type: string
+  parameters:
+    PageLimit:
+      name: limit
+      in: query
+      description: Limits the number of items on a page
+      schema:
+        type: integer
+
+    PageOffset:
+      name: offset
+      in: query
+      description: Specifies the page number of the techniques to be displayed
+      schema:
+        type: integer
+  responses:
+    400Error:
+      description: Invalid request
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+
+
+
+
+
+
+
+

@@ -2,6 +2,7 @@ plugins {
 	id 'org.springframework.boot' version '2.7.3'
 	id 'io.spring.dependency-management' version '1.0.13.RELEASE'
 	id 'java'
+	id "org.openapi.generator" version "6.2.0"
 }
 
 group = 'com.ronicw'
@@ -30,8 +31,27 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'io.projectreactor:reactor-test'
+	implementation 'org.springdoc:springdoc-openapi-webflux-ui:1.6.11'
+	implementation 'org.openapitools:jackson-databind-nullable:0.2.2'
 }
 
+openApiGenerate {
+	generatorName = "spring"
+	inputSpec = "$rootDir/specs/apispec.yml".toString()
+	outputDir = "$buildDir/generated".toString()
+
+	apiPackage = "com.ronicw.beadingservice.api"
+	invokerPackage = "com.ronicw.beadingservice.invoker"
+	modelPackage = "com.ronicw.beadingservice.model"
+	configOptions = [
+			dateLibrary: "java8",
+			reactive: "true",
+			interfaceOnly: "true",
+			skipDefaultInterface: "true"
+	]
+}
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+sourceSets.main.java.srcDirs = ['build/generated/src','src/main/java']
